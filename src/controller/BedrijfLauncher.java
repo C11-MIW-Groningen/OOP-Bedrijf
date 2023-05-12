@@ -1,5 +1,6 @@
 package controller;
 
+import model.Afdeling;
 import model.Persoon;
 
 /**
@@ -9,30 +10,23 @@ import model.Persoon;
 public class BedrijfLauncher {
 
     public static void main(String[] args) {
-        System.out.println(Persoon.getAantalPersonen());
+        Afdeling[] afdelingen = {
+                new Afdeling("Uitvoering", "Hilversum"),
+                new Afdeling("Support", "Amsterdam"),
+                new Afdeling("Management", "Almere"),
+                new Afdeling("Documentatie", "Gouda")
+        };
 
-        Persoon baas = new Persoon("Mark", "Den Haag", 10000);
-        System.out.println(Persoon.getAantalPersonen());
-        System.out.println(baas.getPersoneelsNummer());
+        Persoon baas = new Persoon("Mark", "Den Haag", 10000, afdelingen[2]);
+        Persoon medewerker = new Persoon("Caroline", "Delft", 4000, afdelingen[1]);
+        Persoon assistent = new Persoon("Klaas");
 
-        Persoon medewerker = new Persoon("Caroline", "Delft", 4000);
-        System.out.println(Persoon.getAantalPersonen());
-        System.out.println(medewerker.getPersoneelsNummer());
-
-        Persoon assistent = new Persoon ("Klaas");
-        Persoon manager = new Persoon();
-
-        System.out.println(Persoon.getAantalPersonen());
-
-        String bonus = "geen";
-        if (baas.heeftRechtOpBonus()) {
-            bonus = "wel";
-        }
-
-        System.out.printf("%s verdient %.2f en heeft %s recht op een bonus\n",
-                baas.getNaam(), baas.getMaandSalaris(), bonus);
-
-        System.out.printf("%s verdient %.2f en heeft %s recht op een bonus\n",
-                medewerker.getNaam(), medewerker.getMaandSalaris(), medewerker.heeftRechtOpBonus() ? "wel" : "geen");
+        System.out.printf("Het aantal personen in het bedrijf is %d\n", Persoon.getAantalPersonen());
+        System.out.printf("%s werkt in %s en woont in %s\n",
+                baas.getNaam(), baas.getAfdeling().getAfdelingsPlaats(), baas.getWoonplaats());
+        System.out.printf("%s werkt op de afdeling %s en verdient %.2f\n",
+                medewerker.getNaam(), medewerker.getAfdeling().getAfdelingsNaam(), medewerker.getMaandSalaris());
+        System.out.printf("%s werkt op de afdeling %s en woont in %s\n",
+                assistent.getNaam(), assistent.getAfdeling().getAfdelingsNaam(), assistent.getWoonplaats());
     }
 }
