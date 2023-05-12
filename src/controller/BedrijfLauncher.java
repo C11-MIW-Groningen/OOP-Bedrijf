@@ -22,11 +22,11 @@ public class BedrijfLauncher {
         Persoon assistent = new Persoon("Klaas");
 
         System.out.printf("Het aantal personen in het bedrijf is %d\n", Persoon.getAantalPersonen());
-        System.out.printf("%s werkt in %s en woont in %s\n",
-                baas.getNaam(), baas.getAfdeling().getAfdelingsPlaats(), baas.getWoonplaats());
-        System.out.printf("%s werkt op de afdeling %s en verdient %.2f\n",
-                medewerker.getNaam(), medewerker.getAfdeling().getAfdelingsNaam(), medewerker.getMaandSalaris());
-        System.out.printf("%s werkt op de afdeling %s en woont in %s\n",
-                assistent.getNaam(), assistent.getAfdeling().getAfdelingsNaam(), assistent.getWoonplaats());
+        System.out.printf("%s werkt op %s en woont in %s\n",
+                baas.getNaam(), baas.getAfdeling(), baas.getWoonplaats());
+        System.out.printf("%s werkt op %s en verdient %.2f\n",
+                medewerker.getNaam(), medewerker.getAfdeling(), medewerker.getMaandSalaris());
+        System.out.printf("%s werkt op %s en woont in %s\n",
+                assistent.getNaam(), assistent.getAfdeling(), assistent.getWoonplaats());
     }
 }
