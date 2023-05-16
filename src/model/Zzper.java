@@ -4,7 +4,7 @@ package model;
  * @author Vincent Velthuizen <v.r.velthuizen@pl.hanze.nl>
  * Purpose of the program
  */
-public class Zzper extends Persoon {
+public class Zzper extends Persoon implements Oproepbaar {
 
     private double uurtarief;
     private int urenGewerkt;
@@ -15,6 +15,7 @@ public class Zzper extends Persoon {
         this.urenGewerkt = 0;
     }
 
+    @Override
     public void huurIn(int uren) {
         urenGewerkt += uren;
     }
