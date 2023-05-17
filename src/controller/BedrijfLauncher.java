@@ -4,6 +4,7 @@ import model.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -58,7 +59,22 @@ public class BedrijfLauncher {
             System.out.println("Het is niet gelukt om het personen bestand te openen");
         }
 
-        System.out.println(personen);
+        File uitvoerBestand = new File("resources/PersonenPerAfdeling.txt");
+        try (PrintWriter printWriter = new PrintWriter(uitvoerBestand)) {
+            for (Afdeling afdeling : afdelingen) {
+                printWriter.printf("Afdeling: %s\n", afdeling.getAfdelingsNaam());
+
+                for (Persoon persoon : personen) {
+                    if (persoon.getAfdeling().equals(afdeling)) {
+                        printWriter.printf("-- %s\n", persoon);
+                    }
+                }
+
+                printWriter.println();
+            }
+        } catch (FileNotFoundException fileNotFoundException) {
+            System.out.println("Het is niet gelukt het uitvoer bestand te maken/openen");
+        }
     }
 
     public static void toonJaarInkomen(Persoon persoon) {
