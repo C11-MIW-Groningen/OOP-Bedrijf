@@ -28,7 +28,37 @@ public class BedrijfLauncher {
             System.out.println("Het is niet gelukt om het afdelingen bestand te openen.");
         }
 
-        System.out.println(afdelingen);
+        ArrayList<Persoon> personen = new ArrayList<>();
+        File personenBestand = new File("resources/Personen.csv");
+
+        try (Scanner personenScanner = new Scanner(personenBestand)) {
+            while (personenScanner.hasNextLine()) {
+                String[] persoonsInformatie = personenScanner.nextLine().split(",");
+                String typePersoon = persoonsInformatie[0];
+                String naam = persoonsInformatie[1];
+                String woonplaats = persoonsInformatie[2];
+                int afdelingsIndex = Integer.parseInt(persoonsInformatie[3]);
+                double ietsMetGeld = Double.parseDouble(persoonsInformatie[4]);
+
+                switch (typePersoon) {
+                    case "Werknemer":
+                        personen.add(new Werknemer(naam, woonplaats, afdelingen.get(afdelingsIndex), ietsMetGeld));
+                        break;
+                    case "Zzper":
+                        personen.add(new Zzper(naam, woonplaats, afdelingen.get(afdelingsIndex), ietsMetGeld));
+                        break;
+                    case "Vrijwilliger":
+                        personen.add(new Vrijwilliger(naam, woonplaats, afdelingen.get(afdelingsIndex)));
+                        break;
+                    default:
+                        System.out.printf("Ik weet niet wat ik met persoonstype %s moet doen\n", typePersoon);
+                }
+            }
+        } catch (FileNotFoundException fileNotFoundException) {
+            System.out.println("Het is niet gelukt om het personen bestand te openen");
+        }
+
+        System.out.println(personen);
     }
 
     public static void toonJaarInkomen(Persoon persoon) {
