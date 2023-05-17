@@ -49,4 +49,23 @@ public class AfdelingDAO {
 
         return afdelingen;
     }
+
+    public ArrayList<Afdeling> geefAfdelingenMetPlaats(String afdelingsPlaats) {
+        ArrayList<Afdeling> afdelingen = new ArrayList<>();
+        String sql = "SELECT afdelingsnaam FROM afdeling WHERE afdelingsPlaats = ?;";
+
+        try {
+            PreparedStatement preparedStatement = dBaccess.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, afdelingsPlaats);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String afdelingsNaam = resultSet.getString(1);
+                afdelingen.add(new Afdeling(afdelingsNaam, afdelingsPlaats));
+            }
+        } catch (SQLException sqlException) {
+            System.out.println("SQL Foutmelding: " + sqlException.getMessage());
+        }
+
+        return afdelingen;
+    }
 }
